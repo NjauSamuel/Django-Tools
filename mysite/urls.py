@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('password/', views.passGen, name='passGen'),
     path('weather/', include('weather.urls')),
+    path('qrcode/', include('qrGen.urls')),
 ]

@@ -34,6 +34,9 @@
                 <li>
                     <a href="{% url 'weather' %}" class="block py-2 px-3 {% if request.resolver_match.url_name == 'weather' %}text-blue-600 bg-blue-50 rounded md:bg-transparent md:text-blue-600{% else %}text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600{% endif %} md:p-0 {% if request.resolver_match.url_name == 'weather' %}aria-current="page"{% endif %}">Weather</a>
                 </li>
+                <li>
+                    <a href="{% url 'qrGen' %}" class="block py-2 px-3 {% if request.resolver_match.url_name == 'qrGen' %}text-blue-600 bg-blue-50 rounded md:bg-transparent md:text-blue-600{% else %}text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600{% endif %} md:p-0 {% if request.resolver_match.url_name == 'qrGen' %}aria-current="page"{% endif %}">QR Code</a>
+                </li>
                 {% endblock %}
                 </ul>
             </div>
@@ -42,7 +45,7 @@
   
         {% block content %}{% endblock %}
 
-        <footer class="{% if request.resolver_match.url_name == 'passGen' or request.resolver_match.url_name == 'weather' %}bg-gray-100{% else %}bg-white{% endif %} rounded-base shadow-lg border border-slate-300 m-4">
+        <footer class="{% if request.resolver_match.url_name == 'passGen' or request.resolver_match.url_name == 'weather' or request.resolver_match.url_name == 'qrGen' %}bg-gray-100{% else %}bg-white{% endif %} rounded-base shadow-lg border border-slate-300 m-4">
             <div class="w-full max-w-7xl mx-auto p-4 md:py-8">
                 <div class="sm:flex sm:items-center sm:justify-between">
                     <a href="{% url 'home' %}" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
@@ -66,6 +69,7 @@
             </div>
         </footer>
 
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
     </body>
     
 </html>

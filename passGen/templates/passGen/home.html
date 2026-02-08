@@ -5,14 +5,19 @@
     <div class="grid max-w-7xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div class="mr-auto place-self-center lg:col-span-7">
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Django Tools</h1>
-            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Your all-in-one utility hub built with Django. Generate strong, random passwords instantly and get real-time weather information for any city around the world.</p>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Your all-in-one utility hub built with Django. Generate strong passwords, get real-time weather information, and create QR codes instantly.</p>
 
-            <a href="#password-generator" class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Generate Password
-            </a>
-            <a href="#weather-generator" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                View Weather
-            </a>
+            <div class="flex flex-wrap gap-3">
+                <a href="#password-generator" class="smooth-scroll inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Generate Password
+                </a>
+                <a href="#weather-generator" class="smooth-scroll inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    View Weather
+                </a>
+                <a href="#qr-generator" class="smooth-scroll inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    Generate QR Code
+                </a>
+            </div>
         </div>
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png" alt="mockup">
@@ -117,4 +122,123 @@
         </div>
     </div>
 </section>
+
+<!-- QR Code Generator Section -->
+<section id="qr-generator" class="bg-gray-50 dark:bg-gray-800 py-12">
+    <div class="max-w-2xl mx-auto px-4">
+        <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Generate QR Code</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-center mb-6">Create QR codes from URLs or text. Customize colors, size, and error correction levels on the dedicated page.</p>
+
+            <!-- Quick QR Form -->
+            <form id="home-qr-form" class="space-y-6" onsubmit="generateHomeQR(event)">
+                <div>
+                    <label for="home-qr-value" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        URL or Text
+                    </label>
+                    <input type="text" id="home-qr-value" placeholder="Enter a URL or text (e.g., https://example.com)" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <!-- QR Code Preview -->
+                <div id="home-qr-preview" class="flex justify-center hidden">
+                    <div class="bg-white rounded-lg p-4 border border-gray-200 dark:border-gray-300">
+                        <div id="home-qr-output"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Generate Button -->
+                <button type="submit" class="w-full inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+                    Generate QR Code
+                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <!-- Link to full page (passes input value) -->
+                <a id="advanced-options-link" href="{% url 'qrGen' %}" onclick="passQRValue(event)" class="w-full inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-blue-700 rounded-lg border border-blue-700 bg-transparent hover:bg-blue-100 hover:text-blue-800 focus:ring-4 focus:ring-blue-300 dark:border-blue-500 dark:text-blue-400 dark:hover:bg-gray-800 dark:hover:text-blue-300 dark:focus:ring-blue-800 transition-colors">
+                    Advanced Options
+                    <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- QR Code generation library (qrcodejs) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// --- Slow smooth scroll for hero buttons ---
+function smoothScrollTo(targetEl, duration) {
+    const navbarOffset = 80;
+    const startY = window.pageYOffset;
+    const targetY = targetEl.getBoundingClientRect().top + startY - navbarOffset;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(currentTime) {
+        if (!startTime) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+        if (elapsed < duration) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+
+document.querySelectorAll('.smooth-scroll').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            smoothScrollTo(target, 1200); // 1.2 seconds
+        }
+    });
+});
+
+// --- QR Code generation ---
+function generateHomeQR(event) {
+    event.preventDefault();
+    const value = document.getElementById('home-qr-value').value.trim();
+    if (!value) return;
+
+    const outputDiv = document.getElementById('home-qr-output');
+    const preview = document.getElementById('home-qr-preview');
+
+    // Clear previous QR code
+    outputDiv.innerHTML = '';
+
+    // Generate new QR code
+    new QRCode(outputDiv, {
+        text: value,
+        width: 200,
+        height: 200,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M,
+    });
+
+    preview.classList.remove('hidden');
+}
+
+// --- Pass input value to QR Code advanced page ---
+function passQRValue(event) {
+    const inputValue = document.getElementById('home-qr-value').value.trim();
+    if (inputValue) {
+        event.preventDefault();
+        const baseUrl = document.getElementById('advanced-options-link').href;
+        window.location.href = baseUrl + '?value=' + encodeURIComponent(inputValue);
+    }
+    // If no input, just follow the link normally
+}
+</script>
 {% endblock %}

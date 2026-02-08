@@ -22,6 +22,7 @@
   "homepage": "https://github.com/NjauSamuel/Django-Password-Generator#readme",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "flowbite": "^4.0.1",
     "tailwindcss": "^4.1.18",
     "vite": "^7.3.0"
   }
