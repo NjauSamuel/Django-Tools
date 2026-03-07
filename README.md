@@ -2,6 +2,9 @@
 
 A Django web application providing everyday utility tools -- password generation, live weather lookup, and QR code creation. Built with Django, Tailwind CSS, and Vite.
 
+##
+Project Live demo: https://djangotools.eucossa.com
+
 ## Features
 
 - **Password Generator** -- Customizable length (6-16), uppercase, digits, and symbols.
